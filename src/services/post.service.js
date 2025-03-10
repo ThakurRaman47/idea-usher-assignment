@@ -5,7 +5,9 @@ const Tag = require('../schemas/tag.schema');
 
 // Service function to create a post
 exports.createPost = async (postData, tags) => {
+    // Create a new post
     const post = await Post.create(postData);
+    // Return the post data with tags
     return {
         title: post.title,
         desc: post.desc,
@@ -20,9 +22,11 @@ exports.getTagIds = async (tags) => {
     try {
         const tagIds = [];
         for (const tag of tags) {
+            // Get the tag ID by name
             const tagId = await getTagIdByName(tag);
             tagIds.push(tagId); 
         }
+        // Return the tag IDs
         return tagIds;
     }
     catch (error) {
@@ -33,10 +37,12 @@ exports.getTagIds = async (tags) => {
 // Function to get all posts with filters, sorting, and pagination
 exports.getPosts = async (query) => {
     try {
+        // Extract query parameters
         const { page = 1, limit = 10, sortBy = 'createdAt', order = 'desc', keyword, tag } = query;
 
         const filters = {};
 
+        // Check if keyword is present
         if (keyword) {
             filters.$or = [
                 { title: { $regex: keyword, $options: 'i' } },
@@ -44,6 +50,7 @@ exports.getPosts = async (query) => {
             ];
         }
 
+        // Check if tag is present
         if (tag) {
             const tagId = await getTagIdByName(tag) // Find tag by name
             if (tagId) {

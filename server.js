@@ -9,7 +9,8 @@ require('dotenv').config();
 require('./src/middlewares/multer')
 
 // Connect to MongoDB by using the cluster url
-require('./src/config/database')
+const db = require('./src/config/database')
+
 
 // Configuration of the morgan to logs the incoming requests
 app.use(morgan('tiny'));
