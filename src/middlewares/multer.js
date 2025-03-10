@@ -20,19 +20,17 @@
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function (req, file, cb) {
-      const extension = path.extname(file.originalname) || file.mimetype.split('/')[1];
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      const filePath = `profile/${file.fieldname}-${uniqueSuffix}${extension}`;
-      cb(null, filePath);
-    }
+    key: (req, file, cb) => {
+      const fileExt = path.extname(file.originalname);
+      const fileName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${fileExt}`;
+      cb(null, `uploads/${fileName}`);
+  }
   });
 
   // Custom file filter function
   const fileFilter = (req, file, cb) => {
     // Check if the file's mimetype is in the allowed list
     if (constants.FILE_MIME_TYPE.includes(file.mimetype)) {
-      // Accept the file
       cb(null, true); 
     } else {
       cb(new Error('Invalid file type. Only PNG, JPEG AND JPG'), false);
@@ -41,6 +39,7 @@
 
   exports.upload = multer({ 
     storage: storage, 
+    limits: { fileSize: 5 * 1024 * 1024 },
     fileFilter: fileFilter,  
   });
 
