@@ -15,11 +15,20 @@ exports.createTag = async (name) => {
 exports.checkTagByName = async (name) => {
     try {
         const tag = await Tag.findOne({ name: name.trim() });
-        return { name : tag.name, createdAt :tag.createdAt}
+        return { name : tag?.name, createdAt :tag?.createdAt}
     } catch (error) {
         throw new Error(error.message);
     }
 };
+
+exports.getTagIdByName = async (name) => {
+    try {
+        const tag = await Tag.findOne({ name: name.trim() });
+        return tag._id;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
 
 // Service function to get tags with pagination
 exports.getTags = async (page = 1, limit = 10) => {

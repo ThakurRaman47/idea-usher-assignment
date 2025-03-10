@@ -31,8 +31,9 @@ const validateCreatePost = [
             }
 
             for (const tagName of tags) {
+                console.log(tagName, "=-===========================");
                 const tag = await checkTagByName(tagName);
-                if (!tag) {
+                if (!tag || tag.name) {
                     throw new Error(`Tag '${tagName}' does not exist`);
                 }
             }

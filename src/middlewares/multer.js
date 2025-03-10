@@ -23,7 +23,7 @@
     key: (req, file, cb) => {
       const fileExt = path.extname(file.originalname);
       const fileName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${fileExt}`;
-      cb(null, `uploads/${fileName}`);
+      cb(null, `images/${fileName}`);
   }
   });
 

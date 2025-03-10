@@ -7,9 +7,11 @@ const { validateTags } = require("../services/tag.service");
 
 exports.createPost = async (req, res) => {
     try {
-        const { title, desc, image, tags } = req.body;
+        const { title, description, image, tags } = req.body;
+        const imagekey = req.file ? req.file.key : null;
 
-        const post = await createPost({ title, desc, image, tags });
+        const tagIds = await postService.getTagIds(tags);
+        const post = await postService.createPost({ title, description, image, tags: tagIds, image: imagekey }, tags);
         if (!post) {
             return response.sendErrorResponse(res, StatusCodes.BAD_REQUEST, errorMessages.SOMETHING_WRONG);
         }
