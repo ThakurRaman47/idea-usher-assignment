@@ -3,6 +3,7 @@ module.exports = {
     ALLOWED_CREATE_TAG_FIELDS: ['name'],
     ALLOWED_PAGINATION_FIELDS: ['page', 'limit'],
     ALLOWED_CREATE_POST_FIELDS: ['title', 'description', 'image', 'tags'],
+    ALLOWED_GET_POSTS_FIELDS : ['page', 'limit', 'sortBy', 'sortOrder', 'keyword', 'tag'],
     FILE_MIME_TYPE : ['image/png', 'image/jpeg','image/jpg', 'image/heic'],
     MIN_PAGE_VALUE : 1,
     MIN_LIMIT_VALUE: 10,
@@ -11,4 +12,5 @@ module.exports = {
     MAX_TITLE_LENGTH : 100,
     MAX_DESC_LENGTH : 1000,
     MIN_TAG_NAME_LENGTH : 1,
+    SORT_ORDER : ['asc', 'desc'],
 }

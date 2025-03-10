@@ -24,7 +24,7 @@ exports.checkTagByName = async (name) => {
 exports.getTagIdByName = async (name) => {
     try {
         const tag = await Tag.findOne({ name: name.trim() });
-        return tag._id;
+        return tag?._id;
     } catch (error) {
         throw new Error(error.message);
     }

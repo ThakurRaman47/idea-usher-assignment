@@ -11,6 +11,10 @@ const validationMessages = {
     VALIDATION_MSG : 'Validation failed',
     PAGE_VALIDATION_MSG : 'Page must be a positive integer',
     LIMIT_VALIDATION_MSG : 'Limit must be between 1 and 100',
+    SORT_VALIDATION_MSG : 'Sort must be a string',
+    SORT_DIRECTION_VALIDATION_MSG : 'Sort order must be asc or desc',
+    KEYWORD_VALIDATION_MSG : 'Keyword must be a string',
+    TAG_VALIDATION_MSG : 'Tag must be a string',
 }
 
 const errorMessages = {

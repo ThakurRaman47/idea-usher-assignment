@@ -42,9 +42,10 @@ const validateListTags = [
 
     (req, res, next) => {
         const allowedFields = ALLOWED_PAGINATION_FIELDS;
-        const receivedFields = Object.keys(req.body);
-        
+        const receivedFields = Object.keys(req.query);
+        console.log(allowedFields)
         const extraFields = receivedFields.filter(field => !allowedFields.includes(field));
+        console.log(extraFields)
         if (extraFields.length > 0) {
             return response.sendErrorResponse(res, StatusCodes.BAD_REQUEST, `Unexpected fields: ${extraFields.join(', ')}`) 
         }

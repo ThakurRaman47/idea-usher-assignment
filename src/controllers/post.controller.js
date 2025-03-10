@@ -27,3 +27,19 @@ exports.createPost = async (req, res) => {
         return response.sendErrorResponse(res, error?.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR , error.message);
     }
 }
+
+exports.getAllPosts = async (req, res) => {
+    try {
+        const { page, limit, sortBy, sortOrder, keyword, tag} = req.query;
+        const postsData = await postService.getPosts({ page, limit, sortBy, sortOrder, keyword, tag });
+
+        return response.sendSuccessResponseWithData(
+            res, 
+            StatusCodes.OK,
+            successMessages.POST_FETCHED, 
+            postsData
+        );
+    } catch (error) {
+        return response.sendErrorResponse(res, error?.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR , error.message);
+    }
+}
