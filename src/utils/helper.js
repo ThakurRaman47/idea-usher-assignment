@@ -20,26 +20,6 @@ exports.isMongoDBObjectId = function (id) {
   return mongoose.Types.ObjectId.isValid(id);
 };
 
-exports.validator = (req, res, next) => {
-  if (
-    req.method !== "GET" &&
-    req.method !== "DELETE" &&
-    req.method !== "PATCH" &&
-    ((req.method === "PUT" &&
-      !req.file &&
-      Object.keys(req.body).length === 0) ||
-      (req.method !== "PUT" && Object.keys(req.body).length === 0))
-  ) {
-    return res.status(400).json({ error: "Request body cannot be empty" });
-  }
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-};
-
 
 exports.paramValidator = (req, res, next) => {
   

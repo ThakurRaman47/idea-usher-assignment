@@ -4,12 +4,12 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { SERVER_RUNNING } = require('./src/utils/message');
-require('dotenv').config({ path: process.env.ENV_PATH });
+require('dotenv').config();
 
 require('./src/middlewares/multer')
 
 // Connect to MongoDB by using the cluster url
-require('./src/config/db/mongodb')
+require('./src/config/database')
 
 // Configuration of the morgan to logs the incoming requests
 app.use(morgan('tiny'));

@@ -7,6 +7,7 @@ const TagSchema = new mongoose.Schema(
             required: true,
             unique: true,
             trim: true,
+            maxLength : 50
         },
     },
     { timestamps: true }
