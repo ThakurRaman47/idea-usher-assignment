@@ -26,7 +26,6 @@ exports.createPost = async (req, res) => {
             post
         );
     } catch (error) {
-        console.log(error)
         return response.sendErrorResponse(res, error?.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR , error.message);
     }
 }
