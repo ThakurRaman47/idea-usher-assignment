@@ -1,4 +1,4 @@
-const messages = require("../utils/message")
+const { successMessages, errorMessages} = require("../utils/message")
 const response = require("../utils/response-handler");
 const { StatusCodes } = require("http-status-codes")
 const tagService = require("../services/tag.service");
@@ -8,13 +8,13 @@ exports.createTag = async (req, res) => {
         const { name } = req.body;
         const tag = await tagService.createTag(name);
         if (!tag) {
-            return response.sendErrorResponse(res, StatusCodes.BAD_REQUEST, messages.SOMETHING_WRONG);
+            return response.sendErrorResponse(res, StatusCodes.BAD_REQUEST, errorMessages.SOMETHING_WRONG);
         }
 
         return response.sendSuccessResponseWithData(
             res, 
             StatusCodes.CREATED, 
-            messages.TAG_CREATED, 
+            successMessages.TAG_CREATED, 
             tag
         );
 
@@ -34,7 +34,7 @@ exports.getTagList = async (req, res) => {
         return response.sendSuccessResponseWithData(
             res,
             StatusCodes.OK,
-            'Tags fetched successfully',
+            successMessages.TAGS_FETCHED,
             result
         );
     } catch (error) {

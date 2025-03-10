@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const response = require("../utils/response-handler");
 const { StatusCodes } = require("http-status-codes");
-const { ALLOWED_CREATE_POST_FIELDS } = require('../utils/constant');
+const { ALLOWED_CREATE_POST_FIELDS, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, MAX_DESC_LENGTH } = require('../utils/constant');
 const { checkTagByName } = require('../services/tag.service');
 const { validationMessages } = require('../utils/message')
 
@@ -9,12 +9,12 @@ const validateCreatePost = [
     // Title validation: required, min 1 character, max 100 characters
     body('title')
         .notEmpty().withMessage(validationMessages.TITLE_VALIDATION_MSG)
-        .isLength({ min: 1, max: 100 }).withMessage(validationMessages.TITLE_CHAR_LIMIT_MSG),
+        .isLength({ min: MIN_TITLE_LENGTH, max: MAX_TITLE_LENGTH }).withMessage(validationMessages.TITLE_CHAR_LIMIT_MSG),
 
     // Description validation: required, max 1000 characters
     body('description')
         .notEmpty().withMessage(validationMessages.DESCRIPTION_VALIDATION_MSG)
-        .isLength({ max: 1000 }).withMessage(validationMessages.DESCRIPTION_CHAR_LIMIT_MSG),
+        .isLength({ max: MAX_DESC_LENGTH }).withMessage(validationMessages.DESCRIPTION_CHAR_LIMIT_MSG),
 
     // Image validation: optional, must be a string
     body('image')

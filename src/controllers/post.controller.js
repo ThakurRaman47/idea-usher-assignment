@@ -1,4 +1,4 @@
-const messages = require("../utils/message")
+const {successMessages, errorMessages} = require("../utils/message")
 const response = require("../utils/response-handler");
 const { StatusCodes } = require("http-status-codes")
 const postService = require("../services/post.service");
@@ -11,13 +11,13 @@ exports.createPost = async (req, res) => {
 
         const post = await createPost({ title, desc, image, tags });
         if (!post) {
-            return response.sendErrorResponse(res, StatusCodes.BAD_REQUEST, messages.SOMETHING_WRONG);
+            return response.sendErrorResponse(res, StatusCodes.BAD_REQUEST, errorMessages.SOMETHING_WRONG);
         }
 
         return response.sendSuccessResponseWithData(
             res, 
             StatusCodes.CREATED,
-            messages.POST_CREATED, 
+            successMessages.POST_CREATED, 
             post
         );
     } catch (error) {

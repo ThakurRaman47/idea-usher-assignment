@@ -13,9 +13,10 @@ const validationMessages = {
     LIMIT_VALIDATION_MSG : 'Limit must be between 1 and 100',
 }
 
-const ErrorMessages = {
+const errorMessages = {
     INTERNAL_SERVER_ERROR : 'Internal server error',
     MONGODB_ERROR : 'Error connecting to MongoDB',
+    TAG_EXISTS : 'Tag already exists',
     SOMETHING_WRONG: 'Something went wrong',
     NOT_FOUND : 'Not found',
     BAD_REQUEST : 'Bad request',
@@ -35,6 +36,6 @@ const successMessages = {
 
 module.exports = {
     validationMessages,
-    ErrorMessages,
+    errorMessages,
     successMessages
 }
