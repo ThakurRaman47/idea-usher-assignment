@@ -7,13 +7,15 @@ exports.createTag = async (name) => {
     if (existingTag) {
         throw new Error(errorMessages.TAG_EXISTS);
     }
-    return await Tag.create({ name });
+    const tag = await Tag.create({ name });
+    return { name : tag.name, createdAt :tag.createdAt}
 };
 
 // Servive function to check if a tag exists by name
 exports.checkTagByName = async (name) => {
     try {
-        return await Tag.findOne({ name: name.trim() });
+        const tag = await Tag.findOne({ name: name.trim() });
+        return { name : tag.name, createdAt :tag.createdAt}
     } catch (error) {
         throw new Error(error.message);
     }
@@ -28,7 +30,11 @@ exports.getTags = async (page = 1, limit = 10) => {
             {
                 $facet: {
                     metadata: [{ $count: "total" }],
-                    data: [{ $skip: skip }, { $limit: limit }]
+                    data: [
+                        { $skip: skip }, 
+                        { $limit: limit },
+                        { $project: { _id: 0, name: 1, createdAt :1 } }
+                    ]
                 }
             }
         ]);
